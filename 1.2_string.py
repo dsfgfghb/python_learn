@@ -23,3 +23,11 @@ print("-----------------------------------------")
 favo_langage="        python       "
 print(f"{favo_langage.lstrip()}+sdf")
 print(f"{favo_langage.strip()}+sdf")
+
+nostarch_url='https://nostarch.com'
+nostarch_url.removeprefix('https://') #去除前缀
+print(nostarch_url.removeprefix('https://'))    
+
+# message ='this's a message'  this 前后的'导致了python无法确定结束位置
+message ="this 's a message"
+print (message)
