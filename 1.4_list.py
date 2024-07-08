@@ -4,7 +4,7 @@ print(bicycles[0])       #会打印出列表中的第一个元素: trek  索引�
 print(bicycles[0].title())    #可以直接调用字符串方法
 
 print(bicycles[-1])       #会打印出列表中的最后一个元素: specialized
-
+print("----------------------------------------------------------------------------------------")
 message=f"My first bicycle was a {bicycles[0].title()}."
 print(message)
 
@@ -20,12 +20,29 @@ print(bicycles)
 del bicycles[0]       #del 列表名[索引] 可以直接删除列表中的元素
 print(bicycles)
 
-motorcycle=bicycles.pop()     #  pop()  可以直接删除列表末尾的元素，并返回被删除的元素 "相当于弹出栈顶元素"
+motorcycle=bicycles.pop()     #  pop()  可以直接删除列表末尾的元素，并返回被删除的元素. "相当于弹出栈顶元素"
 print(motorcycle)
 print(bicycles)         # 末尾的元素已将被删除
 motorcycle=bicycles.pop(1)     #  pop(索引) 可以直接删除对应索引的元素,并返回被删除的元素
 print(motorcycle)
- 
+print("----------------------------------------------------------------------------------------")
 bicycles=['trek', 'cannondale', 'redline', 'specialized'] 
 
 bicycles.remove('trek')     # remove("元素") 可以直接删除列表中第一个出现的该元素，如果该元素不存在，会报错
+
+bicycles.sort()     # sort() 可以直接对列表元素进行排序,排序能永久保留,不能回复到原来的排序
+print(bicycles)
+bicycles.sort(reverse=True)     # sort(reverse=True) 可以对列表元素进行倒序排序
+print(bicycles)
+
+bicycles=['trek', 'cannondale', 'redline', 'specialized']
+print(sorted(bicycles))     # sorted(列表) 可以直接对列表元素进行排序,排序不能永久保留,可以回复到原来的排序    
+print(bicycles)
+
+bicycles.reverse()     # reverse()可以直接对列表元素 排序 反转,排序能永久保留,不能回复到原来的排序
+print(bicycles)
+
+len(bicycles)     # len(列表) 可以返回列表的长度
+print("----------------------------------------------------------------------------------------")
+
+
