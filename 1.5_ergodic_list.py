@@ -30,5 +30,35 @@ print("-------------------------------------------------------------------------
 
 squares = []
 for value in range(1,11):
-    squares.append(value**2)
+    squares.append(value**2)   #使用range来创建列表
 print(squares)
+print("----------------------------------------------------------------------------------------")
+#4.4.1切片
+print("4.4.1切片")
+players = ['charles','martina','michael','florence','eli']
+print(players[0:3])  #打印一个player列表的切片，该切片包含player前三名成员0,1,2  0为开始的成员的索引，3为最后的成员是该索引的前一个成员，即索引2对应的成员
+print(players[1:4])
+print(players[:4])   #若没有第一个索引，则从第一个开始
+print(players[2:])   #若没有最后一个索引，则直到最后一个才结束
+print(players[-3:])  #输出最后三个
+print("----------------------------------------------------------------------------------------")
+#4.4.2遍历切片
+print("4.4.2遍历切片")
+players = ['charles','martina','michael','florence','eli']
+for player in players[:3]:
+    print(player.title())
+print("----------------------------------------------------------------------------------------")
+# 4.4.3复制列表
+print('4.4.3复制列表')
+my_foods = ['pizza', 'falafel', 'carrot cake']
+friend_foods = my_foods[:]     #复制列表
+# friend_foods = my_foods       #friend_foods和my_foods指向同一个列表，不是生成两个列表  (似乎是两个指向同一个地址的变量??)
+my_foods.append("cannoli")
+
+friend_foods.append("ice cream")        #可以确定确实有两个列表
+print("My favorite foods are:")
+
+print(my_foods)
+print("My friend's favorite foods are:")
+print(friend_foods)
+
