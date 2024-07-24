@@ -61,4 +61,25 @@ print("My favorite foods are:")
 print(my_foods)
 print("My friend's favorite foods are:")
 print(friend_foods)
+print("----------------------------------------------------------------------------------------")
+# 4.5.1元组
+print("4.5.1定义元组")
+dimensions=(200,50)
+print(dimensions[0])
+print(dimensions[1])
+# dimensions[0]=250       #报错，元组元素不能被修改
+my_t=(3,)       #严格地说，元组是由逗号标识的，圆括号只是让元组看起来更整洁、更清晰。
+my_t=3,5,6
+print(my_t)
+print("----------------------------------------------------------------------------------------")
+# 4.5.2遍历元组
+print("4.5.1遍历元组")
+dimensions=(200,50)
+print("Original dimensions")
+for dimension in dimensions:
+    print(dimension)        #遍历元组内的元素
 
+dimensions=(400,100)    #修改元组变量
+print("\nModified dimensions:")
+for dimension in dimensions:
+    print(dimension)

@@ -70,3 +70,8 @@ for i in my_foods:
     print(i)
 for i in friend_foods:
     print(i)
+print("----------------------------------------------------------------------------------------")
+#4.13
+foods=("rice","noodle","pie","pizza","hamburger")
+# foods[0]="beef"
+foods=("beef","noodle","pork","pizza","hamburger")
