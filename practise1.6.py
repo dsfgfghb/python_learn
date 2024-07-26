@@ -99,3 +99,53 @@ if 'banana' in favorite_fruits:
     print("You really like banana!")
 if 'watermelon' in favorite_fruits:
     print("You really like watermelon!")
+print("----------------------------------------------------------------------------------------")
+#5.8
+namelist = ['tom','jerry','tome','admin','jeson']
+for item in namelist:
+    if item == 'admin':
+        print(f"Hello {item},would you like to see a status report?")
+    else :
+        print(f"Hello {item},thank you for logging in again.")
+print("----------------------------------------------------------------------------------------")
+#5.9
+namelist = []
+
+if namelist :
+    for item in namelist:
+        if item == 'admin':
+            print(f"Hello {item},would you like to see a status report?")
+        else:
+            print(f"Hello {item},thank you for logging in again.") 
+else :
+       print("We need to find some users!")
+print("----------------------------------------------------------------------------------------")
+#5.10
+current_users = ['Tom','Jerry','tome','admin','adc']
+new_users = ['Tom','QQ','Tab','Jerry','enter']
+current_users_lower = current_users[:]
+
+for i in range(0,len(current_users_lower)):
+    current_users_lower[i]=current_users_lower[i].lower()
+    
+for name in new_users:
+    if name.lower() in current_users_lower:
+        print(f"{name.capitalize()} has been used.you need to change your name.")
+    else:
+        print(f"{name.capitalize()} is not used")
+
+print("----------------------------------------------------------------------------------------")
+#5.11
+nomber_list = []
+for i in range(1,10):
+    nomber_list.append(i)
+
+for nomber in nomber_list:
+    if nomber==1:
+        print("1st")
+    elif nomber ==2 :
+        print('2nd')
+    elif nomber == 3 :
+        print("3rd")
+    else :
+        print(f"{nomber}th")

@@ -150,3 +150,35 @@ if 'pepperoni' in requested_toppings:       #不能用elif,因为只要有一个
 if 'extra cheese' in requested_toppings:
     print("Adding extra cheese")
 print("\nFinished making your pizza!")
+
+print("----------------------------------------------------------------------------------------")
+#5.4.1检查特殊元素
+print("5.4.1检查特殊元素")
+requested_toppings = ['mushrooms','green peppers','extra cheese']
+for requested_topping in requested_toppings:
+    if requested_topping == 'green peppers':
+        print('Sorry, we are out of green peppers right now.')
+    else:
+        print(f"Adding {requested_topping}.")
+print("\nFinished making your pizza!")
+print("----------------------------------------------------------------------------------------")
+#5.4.2确定列表非空
+print("5.4.2确定列表非空")
+requested_toppings = []
+if requested_toppings:              #判断是否为空  为空则返回0
+    for requested_topping in requested_toppings:
+        print(f"Adding {requested_topping}.")
+else:
+    print("Are you sure you want a plain pizza?")
+    
+print("----------------------------------------------------------------------------------------")
+#5.4.3使用多个列表
+print("5.4.3使用多个列表")
+available_toppings = ['mushrooms','olives','green peppers','pepperoni','pineapple','extra cheese']
+requested_toppings = ['mushrooms','french fries','extra cheese']
+for requested_topping in requested_toppings:
+    if requested_topping in available_toppings :
+        print(f"Adding {requested_topping}.")
+    else:
+        print(f"Sorry,we don't have {requested_topping}. ")
+print("\nFinished making your pizza!")
