@@ -83,3 +83,60 @@ alien_0 = {'color' : 'green','speed':'slow'}
 # print(alien_0['points'])            #直接访问字典没有的键会报错
 point_value = alien_0.get('points','No point value assigned.')      #字典.get(键,value)  会返回该键的值,若没有该键则返回value
 print(point_value)
+
+print("----------------------------------------------------------------------------------------")
+#6.3.1遍历所有的键值对
+print("6.3.1遍历所有的键值对")
+user_0 = {
+    'username' : 'efermi',
+    'first' : 'enrico',
+    'last' : 'fermi'
+}
+for key,value in user_0.items():           #声明两个变量来获得所有的信息
+    print(f"\nkey:{key}")
+    print(f"Value:{value} ")
+
+print("----------------------------------------------------------------------------------------")
+#6.3.1遍历所有的键
+print("6.3.1遍历所有的键")
+favorite_languages = {
+ 'jen': 'python',
+ 'sarah': 'c',
+ 'edward': 'rust',
+ 'phil': 'python',                
+ }
+
+for name in favorite_languages.keys():          #.keys() 会提取字典里所有的键
+    print(name.title())
+
+
+for name in favorite_languages:          #在遍历字典时会默认遍历所有的键,所以不加.keys()时输出不变
+    print(name.title())
+    
+print("----------------------------------------------------------------------------------------")
+#6.3.3 按特定的顺序遍历字典中的所有键
+print("6.3.3 按特定的顺序遍历字典中的所有键")
+favorite_languages = {
+ 'jen': 'python',
+ 'sarah': 'c',
+ 'edward': 'rust',
+ 'phil': 'python',                
+ }
+
+for name in sorted(favorite_languages.keys()):
+    print(f"{name.title()},thank you for taking our poll!")         #sorted() 会给字典排序
+
+print("----------------------------------------------------------------------------------------")
+#6.3.4 遍历字典中的所有值
+print("6.3.4 遍历字典中的所有值")
+favorite_languages = {
+ 'jen': 'python',
+ 'sarah': 'c',
+ 'edward': 'rust',
+ 'phil': 'python',                
+ }
+
+print("The following languages have been mentioned:")           
+for language in favorite_languages.values():                    #.values() 会提取所有的值
+    print(language.title())
+    
