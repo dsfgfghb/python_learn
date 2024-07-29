@@ -140,3 +140,75 @@ print("The following languages have been mentioned:")
 for language in favorite_languages.values():                    #.values() 会提取所有的值
     print(language.title())
     
+print("----------------------------------------------------------------------------------------")
+#6.4.1字典列表
+print("6.4.1字典列表")
+alien_0 = {'color': 'green', 'points': 5}
+alien_1 = {'color': 'yellow', 'points': 10}
+alien_2 = {'color': 'red', 'points': 15}
+
+aliens = [alien_0,alien_1,alien_2]              #用列表储存多个字典
+
+for alien in aliens:
+    print(alien)
+    
+aliens = []
+for alilen_nomber in range (30):
+    new_alien = {'color': 'green', 'points': 5,'speed' : 'slow'}
+    aliens.append(new_alien)
+
+for alien in aliens[:5]:
+    print(alien)
+print("...")
+
+print(f"Total number of aliens:{len(aliens)}!")
+
+print("----------------------------------------------------------------------------------------")
+#6.4.2在字典中存储列表
+print("6.4.2在字典中存储列表")
+pizza = {
+    'crust' : 'thick',
+    'toppints' : ['mushroom','extra cheese']            #用字典存储列表
+}
+
+print(f"You ordered a {pizza['crust']}-crust pizza"
+      "with the following toppings:")
+
+for topping in pizza['toppints']:               #读取字典中的列表
+    print (f"\t{topping}")
+
+favorite_languages = {
+ 'jen': ['python','rust'],
+ 'sarah': ['c'],
+ 'edward': ['rust','go'],
+ 'phil': ['python','haskell'],                
+ }
+
+for name , languages in favorite_languages.items():
+    print(f"\n{name.title()}'s favorite language:")
+    for language in languages:
+        print(f"\t{language.title()}")
+
+print("----------------------------------------------------------------------------------------")
+#6.4.3 在字典中存储字典
+print("6.4.3 在字典中存储字典")
+
+users = {
+    'aeinstein' : {
+        'first' :'albert',
+        'last' : 'einstein',
+        'location'  : 'princeton',
+    },
+    'mcurie' : {
+        'first' : 'marie',
+        'last' : 'curie',
+        'location' : 'paris',
+    },
+}
+for username,user_info in users.items():
+    print(f"\tUsername:{username}")
+    full_name = f"{user_info['first']} {user_info['last']}"
+    location = user_info['location']
+    
+    print(f"\tFull name: {full_name.title()}")
+    print(f"\tLocation: {location}")
