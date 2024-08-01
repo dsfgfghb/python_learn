@@ -69,5 +69,40 @@ while True:
 
 print("----------------------------------------------------------------------------------------")
 #7.7
-while 1:
-    print("Unlimit time")
+# while 1:
+#     print("Unlimit time")
+
+print("----------------------------------------------------------------------------------------")
+#7.8
+sandwich_orders =['sandwich1','sandwich2','sandwich3']
+finished_sandwiches=[]
+while sandwich_orders:
+    respond = sandwich_orders.pop()
+    print(f"{respond} are finished.")
+    finished_sandwiches.append(respond)
+    
+for sandwich in finished_sandwiches:
+    print(sandwich)
+    
+print("----------------------------------------------------------------------------------------")
+#7.9
+sandwich_orders =['sandwich1','pastrami','sandwich2','pastrami','sandwich3','pastrami']
+print("pastrami are sell off")
+while 'pastrami' in sandwich_orders:
+    sandwich_orders.remove('pastrami')
+print(sandwich_orders)
+
+print("----------------------------------------------------------------------------------------")
+#7.10
+places = {}
+while True :
+    name = input ("What is your name?")
+    place = input("If you could visit one place in the world, where would you go?")
+    places[name] = place
+    respond = input("Would you like to respnd again?(yes/no)")
+    if (respond == 'no'):
+        break
+
+for name,place in places:
+    print(f"{name} want to go to {place}")
+    

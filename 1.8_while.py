@@ -97,5 +97,46 @@ print("-------------------------------------------------------------------------
 #7.2.6 避免无限循环
 print("7.2.6 避免无限循环")
 x = 1
-while x<=5:
-    print(x)                                 #当程序被写成了无限循环时,可以按下ctrl+c键退出程序
+# while x<=5:
+#     print(x)                                 #当程序被写成了无限循环时,可以按下ctrl+c键退出程序
+    
+print("----------------------------------------------------------------------------------------")
+#7.3.1在列表之间移动元素
+print("7.3.1在列表之间移动元素")
+unconfirmed_users = ['alice', 'brian', 'candace']
+confirmed_users = []
+
+while unconfirmed_users:                                #当该列表为空时退出
+    current_user = unconfirmed_users.pop()
+    print(f"Verifying user:{current_user.title()}!")        #移动操作: 将一个列表的元素pop出来后 append()进另一个列表里
+    confirmed_users.append(current_user)
+    
+print("\nThe follow users have been confirmed:")
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+    
+print("----------------------------------------------------------------------------------------")
+#7.3.2 删除为特定值的所有列表元素
+print("7.3.2 删除为特定值的所有列表元素")
+pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+print(pets)
+while 'cat' in pets:
+    pets.remove('cat')
+print(pets)
+
+print("----------------------------------------------------------------------------------------")
+#7.3.3 使用用户输入填充字典
+print("7.3.3 使用用户输入填充字典")
+responses = {}
+polling_active =True
+
+while polling_active:
+    name = input("\nWhat is your name?")
+    response = input("Which mountain would you like to climb someday?")
+    responses[name] = response
+    repeat = input("Would you like to let another person respond?(yes/no)")
+    if repeat == 'no':
+        polling_active =False
+print ("\n---Poll Results---")
+for name,response in responses.items():
+    print(f"{name} would like to climb {response}.")
