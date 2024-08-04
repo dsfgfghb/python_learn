@@ -31,3 +31,40 @@ def describe_city(name,nation='China'):
 describe_city('guangzhou')
 describe_city('shanhai')
 describe_city('Reykjavik',"Iceland")
+
+print("----------------------------------------------------------------------------------------")
+#8.6
+def city_country(city,country):
+    string =f"{city.lower().title()},{country.lower().title()}"
+    return string
+a = city_country('santiago','chile')
+print(a)
+a = city_country('guangzhou','China')
+print(a)
+a = city_country('Reykjavik',"Iceland")
+print(a)
+
+print("----------------------------------------------------------------------------------------")
+#8.7
+def make_album(name,album,nomber=None):
+    singer = {'name':name,'album':album}
+    if nomber:
+        singer['nomber']=nomber
+    return singer
+singer = make_album('Anny','A big banana',1)
+print(singer)
+
+print("----------------------------------------------------------------------------------------")
+#8.8
+while True:
+    print("Please tell me the singer name and album")
+    print("(enter 'q' at any time to quit)")
+
+    name=input('name:')
+    if a=='q':
+        break
+    album = input('album:')
+    if album =='q':
+        break
+    singer=make_album(name,album)
+    print(singer)
