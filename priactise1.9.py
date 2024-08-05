@@ -68,3 +68,62 @@ while True:
         break
     singer=make_album(name,album)
     print(singer)
+
+print("----------------------------------------------------------------------------------------")
+#8.9
+words = ["hello" , 'hi' , 'goologe']
+def show_messages(words):
+    for word in words:
+        print(word)
+show_messages (words)
+
+print("----------------------------------------------------------------------------------------")
+#8.10
+send_message = ["hello" , 'hi' , 'goologe']
+sent_messages = []
+def send_messages(send_message,sent_messages):
+    while send_message:
+        message = send_message.pop()
+        print(message)
+        sent_messages.append(message)
+
+send_messages(send_message,sent_messages)
+print(send_message)
+print(sent_messages)
+
+print("----------------------------------------------------------------------------------------")
+#8.11
+
+send_message = ["hello" , 'hi' , 'goologe']
+sent_messages = []
+
+send_messages(send_message[:],sent_messages[:])
+print(send_message)
+print(sent_messages)
+
+print("----------------------------------------------------------------------------------------")
+#8.12
+def Description(*sandwich):
+    for topping in sandwich:
+        print(topping)
+
+Description('mushrooms')
+Description('mushrooms', 'green peppers')
+Description('mushrooms', 'green peppers', 'extra cheese')
+
+print("----------------------------------------------------------------------------------------")
+#8.13
+
+def build_profile(first_name,secend_name, **my_info):
+    my_info['first_name'] = first_name
+    my_info['second_name'] = secend_name
+    return my_info
+print (build_profile('feng' , 'jun' ,age=19))
+
+print("----------------------------------------------------------------------------------------")
+#8.14
+def car_information(maker,type,**car_info):
+    car_info['maker'] = maker
+    car_info['type'] = type
+    return car_info
+print(car_information('subaru','outback',color='blue',tow_package=True))

@@ -139,3 +139,74 @@ while True:
     formatted_name = get_formatted_name(f_name, l_name)         #在while循环中调用函数
     print(f"\nHello, {formatted_name}!")
     
+print("----------------------------------------------------------------------------------------")
+#8.4.1在函数中修改列表
+print("8.4.1在函数中修改列表")
+def greet_users(names):
+
+    for name in names:
+        msg = f"Hello, {name.title()}!"
+        print(msg)
+usernames = ['hannah', 'ty', 'margot']  
+greet_users(usernames)                      #传递列表
+
+unprinted_designs = ['phone case', 'robot pendant','dodecahedron']
+completed_models = []
+
+while unprinted_designs:
+    current_design = unprinted_designs.pop()
+    print(f"Printing model: {current_design}")
+    completed_models.append(current_design)
+
+print("\nThe following models have been printed:")              #不使用函数时
+for completed_model in completed_models:
+ print(completed_model)
+
+def print_models(unprinted_designs,completed_models):
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        print(f"Printing model:  {current_design}")         #在函数里修改传进来的列表
+        completed_models.append(current_design)
+    
+def show_compljeted_models(completed_models):
+    print("\nThe following models have been printed:")
+    for completed_model in completed_models:
+        print(completed_model)
+    
+unprinted_designs = ['phone case', 'robot pendant','dodecahedron']
+completed_models = []
+print_models(unprinted_designs,completed_models)
+show_compljeted_models(completed_models)
+
+print("----------------------------------------------------------------------------------------")
+#8.4.2 禁止函数修改列表
+print("8.4.2 禁止函数修改列表")
+
+#function_name(list_name[:])        #可以传一个列表的副本来防止函数修改列表
+
+
+print("----------------------------------------------------------------------------------------")
+#8.5.1 传递任意数量的实参
+print("8.5.1 传递任意数量的实参")
+
+def make_pizza(*toppings):                          # *toppings中的*号是让python创建一个元祖,该元祖包含函数收到的所有值
+    print(toppings)
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')        #传递任意数量的参数都不会报错
+
+def make_pizza(size, *toppings):                            #函数定义中必须将可以接纳任意数量的参数放在最后
+    print(f"\nMaking a {size}-inch pizza with the followingtoppings:")
+    for topping in toppings:
+        print(f"- {topping}")
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+
+print("----------------------------------------------------------------------------------------")
+#8.5.2 使用任意数量的关键字实参
+print("8.5.2 使用任意数量的关键字实参")
+def build_profile(first, last, **user_info):                # 两个* 表示让python创建一个字典,该字典包括函数收到的其他所有名值对
+    user_info['first_name'] = first
+    user_info['last_name'] = last
+    return user_info
+user_profile = build_profile('albert', 'einstein',location='princeton',field='physics') 
+print(user_profile)                                         #返回的字典包含location 和 field 的内容
