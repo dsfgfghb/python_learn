@@ -82,3 +82,49 @@ for i in range(10):
 print(Tom.login_attempts)
 Tom.reset_login_attempts()
 print(Tom.login_attempts)
+
+
+print("----------------------------------------------------------------------------------------")
+#9.6
+class IceCreamStand(Restaurant):
+    def __init__(self, name, type,flavors):
+        super().__init__(name, type)
+        self.flavors=flavors
+    
+    def show_flavor(self):
+        print("I like :")
+        for item in self.flavors:
+            print(item)
+    
+ice= IceCreamStand('hh','big',['1','8'])
+ice.show_flavor()
+
+
+print("----------------------------------------------------------------------------------------")
+#9.7
+class Admin(User):
+    def __init__(self, first_name, last_name,privileges):
+        super().__init__(first_name, last_name)
+        self.privileges=privileges
+    
+    def show_privileges(self):
+        print("your privileges:")
+        for privilege in self.privileges:
+            print(privilege)
+
+anna=Admin("anna",'taff',["can add post","can deletepost","can ban user"])
+anna.show_privileges()
+
+print("----------------------------------------------------------------------------------------")
+#9.8
+class Pribileges:
+    def __init__(self,privileges):
+        self.privileges=privileges
+    
+    def show_privileges(self):
+        print("Your privileges:")
+        for item in self.privileges:
+            print(item)
+
+a=Admin('a','b',Pribileges(["can add post","can deletepost","can ban user"]))
+a.privileges.show_privileges()
