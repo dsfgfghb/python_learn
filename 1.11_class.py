@@ -175,3 +175,76 @@ my_leaf = ElectricCar('nissan','leaf',2024)
 print(my_leaf.get_descriptive_name())
 my_leaf.battary.describe_battery()
 my_leaf.battary.get_range()
+
+print("----------------------------------------------------------------------------------------")
+#9.4.1 导入单个类 
+print("9.4.1 导入单个类")
+
+from car import Car          #假设有一个名为car.py 的文件   导入Car类
+my_new_car = Car('audi','a4',2024)
+print(my_new_car.get_descriptive_name())
+
+my_new_car.odometer_reading = 23
+my_new_car.read_odometer()
+
+print("----------------------------------------------------------------------------------------")
+#9.4.2在一个模块中储存多个类 
+print("9.4.2在一个模块中储存多个类")
+
+from car import ElectricCar   #car.py内含有多个类
+
+my_leaf = ElectricCar('nissan', 'leaf', 2024)   #调用子类时,可以使用父类的方法
+print(my_leaf.get_descriptive_name())
+my_leaf.battery.describe_battery()
+my_leaf.battery.get_range()
+
+print("----------------------------------------------------------------------------------------")
+#9.4.2在一个模块中储存多个类 
+print("9.4.2在一个模块中储存多个类")
+from car import ElectricCar ,Car            #同时调用多个类
+
+
+my_mustang = Car('ford', 'mustang', 2024)
+print(my_mustang.get_descriptive_name())
+my_leaf = ElectricCar('nissan', 'leaf', 2024)
+print(my_leaf.get_descriptive_name())
+
+print("----------------------------------------------------------------------------------------")
+#9.4.4 导入整个模块 
+print("9.4.4 导入整个模块")
+import car
+my_mustang = car.Car('ford', 'mustang', 2024)           #导入整个模块后,调用模块的内容时前面要加 模块名.
+print(my_mustang.get_descriptive_name())
+my_leaf = car.ElectricCar('nissan', 'leaf', 2024)
+print(my_leaf.get_descriptive_name())
+
+
+print("----------------------------------------------------------------------------------------")
+#9.4.5 导入模块中的所有类 
+print("9.4.5 导入模块中的所有类")
+
+# from module_name import *         #导入所有类
+
+print("----------------------------------------------------------------------------------------")
+#9.4.6 在一个模块中导入另一个模块 
+print("9.4.6 在一个模块中导入另一个模块")
+
+#模块中可以导入模块 在electric_car.py中可以导入car.py 来确保本程序导入electric_car.py时不会报错
+
+
+print("----------------------------------------------------------------------------------------")
+#9.4.7 使用别名 
+print("9.4.7 使用别名")
+from car import ElectricCar as EC           #给类一个别名
+my_leaf = EC('nissan', 'leaf', 2024)
+
+print("----------------------------------------------------------------------------------------")
+#9.5Python标准库 
+print("9.5Python标准库")
+from random import randint
+print(randint (1,6))            #能够返回1到6的随机数(包括1和6)
+
+from random import choice
+players = ['charles','martina','michael','florence','eli']      
+first_up = choice(players)                  #会随机选择一个列表中的元素
+print(first_up)

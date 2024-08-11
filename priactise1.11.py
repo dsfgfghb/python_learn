@@ -115,8 +115,7 @@ class Admin(User):
 anna=Admin("anna",'taff',["can add post","can deletepost","can ban user"])
 anna.show_privileges()
 
-print("----------------------------------------------------------------------------------------")
-#9.8
+
 class Pribileges:
     def __init__(self,privileges):
         self.privileges=privileges
@@ -128,3 +127,48 @@ class Pribileges:
 
 a=Admin('a','b',Pribileges(["can add post","can deletepost","can ban user"]))
 a.privileges.show_privileges()
+
+print("----------------------------------------------------------------------------------------")
+#9.13
+from random import randint
+class Die :
+    def __init__(self) -> None:
+        self.sides=6
+    def roll_die(self):
+        self.sides= randint(1,6)
+    def roll_die_10(self):
+        self.sides = randint(1,10)
+    def roll_die_20(self):
+        self.sides = randint(1,20)
+
+d=Die()
+for i in range(1,10):
+    d.roll_die()
+    print(d.sides)
+for i in range(1,10):
+    d.roll_die_10()
+    print(d.sides)
+for i in range(1,10):
+    d.roll_die_20()
+    print(d.sides)
+
+print("----------------------------------------------------------------------------------------")
+#9.14
+from random import choice
+caipiao = [1,2,3,4,5,6,7,8,9,0,'A','B','C','D','E']
+C=''
+count=0
+while(C!='A186'):
+    C=''
+    for i in range(1,5):
+        C+=str(choice(caipiao))
+    # if C=='A186':
+    #     print("Success!,you get million dollar")
+    # else:
+    #     print("fail!")
+    count+=1
+    
+print(count)
+
+
+
