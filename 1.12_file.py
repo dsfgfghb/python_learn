@@ -64,3 +64,121 @@ contents = "I love programming.\n"
 contents += "I love creating new games.\n"
 contents += "I also love working with data.\n"
 path.write_text(contents)               #使用write_text()时 如果指定文件已经存在,那么其原本的内容将会被删除
+
+
+
+
+
+print("----------------------------------------------------------------------------------------")       #异常
+#10.3.1 处理 ZeroDivisionError 异常 
+print("10.3.1 处理 ZeroDivisionError 异常")
+# print(5/0)                    #会报错
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.2 使用 try-except 代码块 
+print("10.3.2 使用 try-except 代码块")
+
+try:
+    print(5/0)      #若try代码块运行没有问题,Python会跳过except代码块
+except ZeroDivisionError:
+    print("You can't divide by zero!")      #若try代码块产生了问题,Python会查找指出了该怎么办的except代码块
+                                            #并执行其中的代码
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.3 使用异常避免崩溃 
+print("10.3.3 使用异常避免崩溃")
+
+print("Give me two numbers, and I'll divide them.")
+print("Enter 'q' to quit.")
+
+# while True:
+#     first_number = input("\nFirst number: ")
+#     if first_number == 'q':
+#         break
+#     second_number = input("Second number: ")
+#     if second_number == 'q':
+#         break
+#     answer = int(first_number) / int(second_number)     #若用户输入0作为除数 程序会报错
+#     print(answer)
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.4 else 代码块 
+print("10.3.4 else 代码块")
+
+while True:
+    first_number = input("\nFirst number: ")
+    if first_number == 'q':
+        break
+    second_number = input("Second number: ")
+    if second_number == 'q':
+        break
+    try:
+
+        answer = int(first_number) / int(second_number)
+    except ZeroDivisionError:
+        print("You can't divide by zero!")     
+    else:
+        print(answer)
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.5 处理 FileNotFoundError 异常 
+print("10.3.5 处理 FileNotFoundError 异常")
+
+path = Path('alice.txt')
+try:
+    contents = path.read_text(encoding='utf-8')         #指定读取的编码格式     没有该文件,报错  FileNotFoundError
+except FileNotFoundError:
+    print(f"sorry the file {path} does not exist.")
+
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.6 分析文本 
+print("10.3.6 分析文本")
+
+path = Path('python_learn/alice.txt')
+try:
+    contents = path.read_text(encoding='utf-8')
+except FileNotFoundError:
+    print(f"Sorry, the file {path} does not exist.")
+else:
+    words = contents.split()                                #计算有多少个单词
+    num_words = len(words)
+    print(f"The file {path} has about {num_words} words.")
+
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.7 使用多个文件 
+print("10.3.7 使用多个文件")
+
+def count_words(path):
+    try:
+        contents = path.read_text(encoding='utf-8')
+    except FileNotFoundError:
+        print(f"Sorry, the file {path} does not exist.")
+    else:
+        words = contents.split()                                
+        num_words = len(words)
+        print(f"The file {path} has about {num_words} words.")
+
+path = Path('python_learn/alice.txt')
+count_words(path)
+
+filenames =  ['alice.txt', 'siddhartha.txt', 'moby_dick.txt', 'little_women.txt']           #导入多个文件
+for filename in filenames:
+    path = Path(filename)
+    count_words(path)
+
+print("----------------------------------------------------------------------------------------")       
+#10.3.8 静默失败 
+print("10.3.8 静默失败")
+#pass 语句可以让Python什么都不做
+def count_words(path):
+    try:
+        contents = path.read_text(encoding='utf-8')
+    except FileNotFoundError:
+        # print(f"Sorry, the file {path} does not exist.")
+        pass
+    else:
+        words = contents.split()                                
+        num_words = len(words)
+        print(f"The file {path} has about {num_words} words.")

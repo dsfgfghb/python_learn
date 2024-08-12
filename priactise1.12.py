@@ -25,3 +25,31 @@ while True:
     name+=temp+'\n'
 path.write_text(name)
     
+print("----------------------------------------------------------------------------------------")
+#10.6
+print('Tell me 2 nomber')
+a=input()
+b=input()
+try:
+    a=int(a)+int(b)
+except ValueError:
+    pass
+else:
+    print(a)
+
+print("----------------------------------------------------------------------------------------")
+#10.7
+while True:
+    a=input()
+    if a=='q':
+        break
+    b=input()
+    if b=='q':
+        break
+    try:
+        a=int(a)+int(b)
+    except ValueError:
+        pass
+    else:
+        print(a)
+
