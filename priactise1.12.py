@@ -53,3 +53,20 @@ while True:
     else:
         print(a)
 
+print("----------------------------------------------------------------------------------------")
+#10.8
+
+cats=Pa('python_learn/cats.txt')
+dogs=Pa('python_learn\dogs.txt')
+files = [cats,dogs]
+for file in files:
+    try:
+        contents = file.read_text(encoding='UTF-8')
+    except:
+        # print(f"Sorry, the file {path} does not exist.")
+        pass
+    else:
+        lines=contents.splitlines()
+        for line in lines:
+            print(f"your dog/cat name is {line}")
+
