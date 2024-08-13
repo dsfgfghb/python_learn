@@ -182,3 +182,82 @@ def count_words(path):
         words = contents.split()                                
         num_words = len(words)
         print(f"The file {path} has about {num_words} words.")
+    
+print("----------------------------------------------------------------------------------------")       
+#10.4.1使用 json.dumps() 和 json.loads() 
+print("10.4.1使用 json.dumps() 和 json.loads()")
+
+import json
+
+numbers = [2,3,5,7,11,13]
+
+path = Path('number.json')
+contents = json.dumps(numbers)         #json.dumps()接受一个实参,然后将该实参转化成JSON的格式
+path.write_text(contents)
+
+contents = path.read_text()
+numbers=0
+numbers = json.loads(contents)          #json.lodes()将一个json格式的字符串作为参数,并返回一个Python对象
+print(numbers)
+
+print("----------------------------------------------------------------------------------------")       
+#10.4.2 保存和读取用户生成的数据 
+print("10.4.2 保存和读取用户生成的数据")
+
+username = input("What is your name?")
+
+path = Path('username.json')
+contents = json.dumps(username)
+path.write_text(contents)
+print(f"We'll remember you when you come back,{username}")
+
+contents = path.read_text()
+username= json.loads(contents)
+print(f"Welcome back,{username}")
+
+if path.exists():                       #如果指定的文件存在 exists()函数会返回True ,否则返回false
+    contents = path.read_text()
+    username = json.loads(contents)
+    print(f"Welcome back, {username}!")
+else:
+    username = input("What is your name? ")
+    contents = json.dumps(username)
+    path.write_text(contents)
+    print(f"We'll remember you when you come back, {username}!")
+
+print("----------------------------------------------------------------------------------------")       
+#10.4.3 重构 
+print("10.4.3 重构")
+def greet_user():
+    path = Path('username.json')
+    if path.exists():
+        contents = path.read_text()
+        username = json.loads(contents)
+        print(f"Welcome back, {username}!")
+    else:
+        username = input("What is your name? ")
+        contents = json.dumps(username)
+        path.write_text(contents)
+        print(f"We'll remember you when you come back,{username}!")
+greet_user()
+
+def get_stored_username(path):
+    if path.exists():  
+        contents = path.read_text()
+        username = json.loads(contents)
+        return username
+    else:
+        return None
+def greet_user():                   #重构了该函数
+    path = Path('username.json')
+    username = get_stored_username(path)
+    if username:
+        print(f"Welcome back, {username}!")
+    else:
+        username = input("What is your name? ")
+        contents = json.dumps(username)
+        path.write_text(contents)
+        print(f"We'll remember you when you come back,{username}!")
+
+greet_user()
+

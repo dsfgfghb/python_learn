@@ -68,5 +68,9 @@ for file in files:
     else:
         lines=contents.splitlines()
         for line in lines:
-            print(f"your dog/cat name is {line}")
+            print(f"your dog/cat name is {line}") 
+
+
+print("----------------------------------------------------------------------------------------")
+#10.11
 
