@@ -28,15 +28,53 @@ class AlienInvasion:
             # self.screen.fill(self.settings.bg_color)    #用类设置屏幕
             # self.screen.fill(self.bg_color)         #每次循环都重绘屏幕  fill()接受一个颜色的实参,填充屏幕
             # self.ship.blime()
+            self.ship.update()          #每次循环都刷新一下飞船的位置
             self._update_screen()
             self.clock.tick(60)             #开始计时   ()内为帧率   Pygame 将尽可能确保这个循环每秒恰好运行 60 次。
 
             # pygame.display.flip()           #显示屏幕
             
+    # def _check_events(self):
+    #     for event in pygame.event.get():
+    #         if event.type == pygame.QUIT:
+    #             sys.exit()
+    #         elif event.type==pygame.KEYDOWN:
+    #             if event.key == pygame.K_RIGHT:     #检查按下的将是否为右方向键
+    #                 # self.ship.rect.x +=20
+    #                 self.ship.moving_right=True
+    #             elif event.key == pygame.K_LEFT:
+    #                 self.ship.moving_left=True
+    #         elif event.type==pygame.KEYUP:
+    #             if event.key == pygame.K_RIGHT:
+    #                 self.ship.moving_right = False
+    #             elif event.key == pygame.K_LEFT:
+    #                 self.ship.moving_left = False
+
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
+                
+            
+    def _check_keydown_events(self, event):
+        if event.key == pygame.K_RIGHT:     
+            self.ship.moving_right=True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left=True
+        elif event.key == pygame.K_TAB  :
+            sys.exit()
+    
+    def _check_keyup_events(self, event):
+        if event.key == pygame.K_RIGHT:     
+            self.ship.moving_right=False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left=False
+               
+                
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color) 
