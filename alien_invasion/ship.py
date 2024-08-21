@@ -8,7 +8,7 @@ class Ship:
 
         # 加载飞船图像并获取其外接矩形
         self.image = pygame.image.load('alien_invasion/images/OIP-C.jpg')  
-        self.image = pygame.transform.smoothscale(self.image,(20,20))
+        self.image = pygame.transform.smoothscale(self.image,(100,100))
         self.rect = self.image.get_rect()
 
     #如果要将游戏元素居中，可设置相应 rect 对象的属性 center、centerx 或 centery；
