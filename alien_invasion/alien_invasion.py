@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 class AlienInvasion:
     def __init__(self) -> None:
@@ -21,6 +22,9 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")    
         self.ship = Ship(self)                  #创建飞船
         self.bullets = pygame.sprite.Group()        #子弹编组
+        self.aliens = pygame.sprite.Group()         #外星人编组
+        
+        self._create_fleet()
   
     def run_game(self):
         while True:     
@@ -33,7 +37,13 @@ class AlienInvasion:
             # self.screen.fill(self.bg_color)         #每次循环都重绘屏幕  fill()接受一个颜色的实参,填充屏幕
             # self.ship.blime()
             self.ship.update()          #每次循环都刷新一下飞船的位置
-            self.bullets.update()
+            self._update_bullets()
+            # self.bullets.update()
+            # for bullet in self.bullets.copy():      #进行for循环时必须保持列表长度不变,所以用copy
+            #     if bullet.rect.bottom <= 0:         
+            #         self.bullets.remove(bullet)         #删除子弹
+            # print(len(self.bullets))
+
             self._update_screen()
             self.clock.tick(60)             #开始计时   ()内为帧率   Pygame 将尽可能确保这个循环每秒恰好运行 60 次。
 
@@ -86,15 +96,41 @@ class AlienInvasion:
                
 
     def _update_screen(self):
+        
         self.screen.fill(self.settings.bg_color) 
         self.ship.blime()
-        pygame.display.flip()
+
+        self.aliens.draw(self.screen)           #绘出alien
+
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        pygame.display.flip()
+        
     
+    def _update_bullets(self):
+        self.bullets.update()
+        for bullet in self.bullets.copy():      
+            if bullet.rect.bottom <= 0:         
+                self.bullets.remove(bullet)         
+            print(len(self.bullets))
+
     def _fire_bullet(self):                 #创建一个子弹,并将其加入编组
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets)<self.settings.bullets_allowed:     #限制子弹数量
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+    
+    def _create_fleet(self):                #创建alien实例
+        alien = Alien(self)     
+        alien_width = alien.rect.width    
+        current_x=alien.rect.width
+        self.aliens.add(alien)
+        while current_x<(self.settings.screen_width - 2*alien_width):
+            new_alien = Alien(self)
+            new_alien.x = current_x
+            new_alien.rect.x = current_x
+            self.aliens.add(new_alien)
+            current_x+=alien_width
+       
 
 if __name__ == '__main__':
     ai=AlienInvasion()
