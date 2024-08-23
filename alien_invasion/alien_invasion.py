@@ -37,7 +37,9 @@ class AlienInvasion:
             # self.screen.fill(self.bg_color)         #每次循环都重绘屏幕  fill()接受一个颜色的实参,填充屏幕
             # self.ship.blime()
             self.ship.update()          #每次循环都刷新一下飞船的位置
+
             self._update_bullets()
+            self._update_aliens()
             # self.bullets.update()
             # for bullet in self.bullets.copy():      #进行for循环时必须保持列表长度不变,所以用copy
             #     if bullet.rect.bottom <= 0:         
@@ -102,6 +104,8 @@ class AlienInvasion:
 
         self.aliens.draw(self.screen)           #绘出alien
 
+
+
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         pygame.display.flip()
@@ -109,6 +113,14 @@ class AlienInvasion:
     
     def _update_bullets(self):
         self.bullets.update()
+        # collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,False,True)     #检查是否碰撞
+        #                 #如果rect重叠时,该函数在返回的字典中添加一个键值对 
+        #                 #两个True表示去除对应的子弹和alien,若第一个为false 则只去除alien
+
+        # if not self.aliens:             #检测alien是否为空
+        #     self.bullets.empty()        #清空bullet
+        #     self._create_fleet()
+        self._check_bullet_alien_collisions()
         for bullet in self.bullets.copy():      
             if bullet.rect.bottom <= 0:         
                 self.bullets.remove(bullet)         
@@ -121,16 +133,54 @@ class AlienInvasion:
     
     def _create_fleet(self):                #创建alien实例
         alien = Alien(self)     
-        alien_width = alien.rect.width    
-        current_x=alien.rect.width
+        # alien_width = alien.rect.width    
+        alien_width,alien_height = alien.rect.size  
+        current_x,current_y=alien.rect.width,alien_height
         self.aliens.add(alien)
-        while current_x<(self.settings.screen_width - 2*alien_width):
-            new_alien = Alien(self)
-            new_alien.x = current_x
-            new_alien.rect.x = current_x
-            self.aliens.add(new_alien)
-            current_x+=alien_width
+        while current_y<(self.settings.screen_height- 3 * alien_height):
+            while current_x<(self.settings.screen_width - 2*alien_width):
+                self._create_alien(current_x,current_y)
+                # new_alien = Alien(self)
+                # new_alien.x = current_x
+                # new_alien.rect.x = current_x
+                # self.aliens.add(new_alien)
+                current_x+=alien_width
+            current_x = alien_width
+            current_y +=alien_height
+    
+    def _create_alien(self, x_position,y_position):
+        new_alien = Alien(self)
+        new_alien.x = x_position
+        new_alien.rect.x = x_position
+        new_alien.rect.y = y_position
+
+        self.aliens.add(new_alien)
+    
+    def _update_aliens(self):
+        self._check_fleet_edges()
+        self.aliens.update()
+
+    def _check_fleet_edges(self):
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
        
+    def _change_fleet_direction(self):
+        for alien in self.aliens.sprites():
+            alien.rect.y +=self.settings.fleet_drop_speed
+        self.settings.fleet_direction *=-1
+
+    def _check_bullet_alien_collisions(self):
+        collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,False,True)     #检查是否碰撞
+                        #如果rect重叠时,该函数在返回的字典中添加一个键值对 
+                        #两个True表示去除对应的子弹和alien,若第一个为false 则只去除alien
+
+        if not self.aliens:             #检测alien是否为空
+            self.bullets.empty()        #清空bullet
+            self._create_fleet()
+
+
 
 if __name__ == '__main__':
     ai=AlienInvasion()
