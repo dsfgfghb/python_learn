@@ -4,6 +4,9 @@ from settings import Settings
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+from time import sleep
+from game_statue import GameStatus
+from button import BUtton
 
 class AlienInvasion:
     def __init__(self) -> None:
@@ -20,15 +23,21 @@ class AlienInvasion:
 
         # self.screen =  pygame.display.set_mode((1200,800))  #创建一个显示窗口  (1200,800)为窗口尺寸
         pygame.display.set_caption("Alien Invasion")    
+        self.status = GameStatus(self)          #创建统计信息的实例
         self.ship = Ship(self)                  #创建飞船
         self.bullets = pygame.sprite.Group()        #子弹编组
         self.aliens = pygame.sprite.Group()         #外星人编组
         
         self._create_fleet()
+        # self.game_active = True                 #游戏启动后处于活动状态
+        self.game_active = False
+        self.play_button = BUtton(self,"Play")
   
     def run_game(self):
         while True:     
-            self._check_events()             
+            self._check_events()      
+
+           
             # for event in pygame.event.get():        #侦听事件  pygame.event.get()用来访问监听到的事件
             #     if event.type==pygame.QUIT:         #检测玩家点击游戏窗口的关闭按钮
             #         sys.exit()              #退出游戏
@@ -36,10 +45,10 @@ class AlienInvasion:
             # self.screen.fill(self.settings.bg_color)    #用类设置屏幕
             # self.screen.fill(self.bg_color)         #每次循环都重绘屏幕  fill()接受一个颜色的实参,填充屏幕
             # self.ship.blime()
-            self.ship.update()          #每次循环都刷新一下飞船的位置
-
-            self._update_bullets()
-            self._update_aliens()
+            if self.game_active:
+                self.ship.update()          #每次循环都刷新一下飞船的位置
+                self._update_bullets()
+                self._update_aliens()
             # self.bullets.update()
             # for bullet in self.bullets.copy():      #进行for循环时必须保持列表长度不变,所以用copy
             #     if bullet.rect.bottom <= 0:         
@@ -99,6 +108,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         
+
         self.screen.fill(self.settings.bg_color) 
         self.ship.blime()
 
@@ -108,6 +118,8 @@ class AlienInvasion:
 
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        if not self.game_active:
+            self.play_button.draw_button()
         pygame.display.flip()
         
     
@@ -159,6 +171,12 @@ class AlienInvasion:
     def _update_aliens(self):
         self._check_fleet_edges()
         self.aliens.update()
+        if pygame.sprite.spritecollideany(self.ship,self.aliens):#spritecollideany() 函数接受两个实参：一个精灵和一个编组。
+                                # 它检查编组是否有成员与精灵发生了碰撞，并在找到与精灵发生碰撞的成员后停止遍历编组aliens。
+                                # 返回第一个与飞船发生碰撞的alien
+            # print("Ship hit!")
+            self._ship_hit()
+            self._check_aliens_bottom()
 
     def _check_fleet_edges(self):
         for alien in self.aliens.sprites():
@@ -180,7 +198,26 @@ class AlienInvasion:
             self.bullets.empty()        #清空bullet
             self._create_fleet()
 
+    def _ship_hit(self):
+        if self.status.ships_left>0:    #判断是否还有飞船
 
+            self.status.ships_left-=1
+
+            self.bullets.empty()
+            self.aliens.empty()
+
+            self._create_fleet()            #创建alien舰队
+            self.ship.center_ship()         #将飞船放在屏幕中央底部
+
+            sleep(0.5)          #暂停
+        else:
+            self.game_active =False       #游戏标志
+    
+    def _check_aliens_bottom(self):
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= self.settings.screen_height:    #判断是否到达底部
+                self._ship_hit()
+                break
 
 if __name__ == '__main__':
     ai=AlienInvasion()
