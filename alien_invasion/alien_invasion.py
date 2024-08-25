@@ -84,6 +84,10 @@ class AlienInvasion:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:      #检测鼠标点击事件
+                mouse_pos = pygame.mouse.get_pos()      #返回一个元祖包括点击鼠标是光标所在的x,y坐标
+                self._check_play_button(mouse_pos)
+
                 
             
     def _check_keydown_events(self, event):
@@ -176,7 +180,7 @@ class AlienInvasion:
                                 # 返回第一个与飞船发生碰撞的alien
             # print("Ship hit!")
             self._ship_hit()
-            self._check_aliens_bottom()
+        self._check_aliens_bottom()
 
     def _check_fleet_edges(self):
         for alien in self.aliens.sprites():
@@ -197,6 +201,7 @@ class AlienInvasion:
         if not self.aliens:             #检测alien是否为空
             self.bullets.empty()        #清空bullet
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _ship_hit(self):
         if self.status.ships_left>0:    #判断是否还有飞船
@@ -211,6 +216,7 @@ class AlienInvasion:
 
             sleep(0.5)          #暂停
         else:
+            pygame.mouse.set_visible(True)
             self.game_active =False       #游戏标志
     
     def _check_aliens_bottom(self):
@@ -218,6 +224,22 @@ class AlienInvasion:
             if alien.rect.bottom >= self.settings.screen_height:    #判断是否到达底部
                 self._ship_hit()
                 break
+
+    def _check_play_button(self,mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)  #判断鼠标点击所在位置是否为按钮的rect位置
+        # if self.play_button.rect.collidepoint(mouse_pos):
+        if button_clicked and not self.game_active:
+            pygame.mouse.set_visible(False)             #设置光标不可见
+            self.game_active = True
+            self.status.reset_stats()
+
+            self.bullets.empty()
+            self.aliens.empty()
+
+            self.settings.initialize_dynamic_settings()
+
+            self._create_fleet()
+            self.ship.center_ship()
 
 if __name__ == '__main__':
     ai=AlienInvasion()
