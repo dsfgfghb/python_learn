@@ -7,6 +7,7 @@ from alien import Alien
 from time import sleep
 from game_statue import GameStatus
 from button import BUtton
+from scoreboard import Scoreboard
 
 class AlienInvasion:
     def __init__(self) -> None:
@@ -27,6 +28,7 @@ class AlienInvasion:
         self.ship = Ship(self)                  #创建飞船
         self.bullets = pygame.sprite.Group()        #子弹编组
         self.aliens = pygame.sprite.Group()         #外星人编组
+        self.sb =Scoreboard(self)               #创建计分板
         
         self._create_fleet()
         # self.game_active = True                 #游戏启动后处于活动状态
@@ -118,7 +120,7 @@ class AlienInvasion:
 
         self.aliens.draw(self.screen)           #绘出alien
 
-
+        self.sb.show_score()                #显示计分板
 
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
@@ -197,6 +199,12 @@ class AlienInvasion:
         collisions = pygame.sprite.groupcollide(self.bullets,self.aliens,False,True)     #检查是否碰撞
                         #如果rect重叠时,该函数在返回的字典中添加一个键值对 
                         #两个True表示去除对应的子弹和alien,若第一个为false 则只去除alien
+        if collisions:                  #检查字典是否存在
+            for aliens in collisions.values():              #确保每个alien都计入分数,防止一个子弹击中2个alien的情况只加一次分
+                self.status.score +=self.settings.alien_points     
+                self.sb.prep_score()
+                self.sb.check_high_score()
+            
 
         if not self.aliens:             #检测alien是否为空
             self.bullets.empty()        #清空bullet
@@ -232,6 +240,8 @@ class AlienInvasion:
             pygame.mouse.set_visible(False)             #设置光标不可见
             self.game_active = True
             self.status.reset_stats()
+
+            self.sb.prep_score()            #重置分数后显示分数,保证点击play后显示的分数为0  
 
             self.bullets.empty()
             self.aliens.empty()
