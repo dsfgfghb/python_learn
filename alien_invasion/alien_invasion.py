@@ -206,15 +206,20 @@ class AlienInvasion:
                 self.sb.check_high_score()
             
 
-        if not self.aliens:             #检测alien是否为空
+        if not self.aliens:             #检测alien是否为空 
             self.bullets.empty()        #清空bullet
             self._create_fleet()
             self.settings.increase_speed()
+
+            self.status.level +=1       #等级提升
+            self.sb.prep_level()
+
 
     def _ship_hit(self):
         if self.status.ships_left>0:    #判断是否还有飞船
 
             self.status.ships_left-=1
+            self.sb.prep_ships()        #更新飞船图象
 
             self.bullets.empty()
             self.aliens.empty()
@@ -242,6 +247,8 @@ class AlienInvasion:
             self.status.reset_stats()
 
             self.sb.prep_score()            #重置分数后显示分数,保证点击play后显示的分数为0  
+            self.sb.prep_level()            #显示等级
+            self.sb.prep_ships()
 
             self.bullets.empty()
             self.aliens.empty()

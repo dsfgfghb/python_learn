@@ -1,7 +1,9 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
     def __init__(self,ai_game) -> None:         #引入AlienInvasion 使ship可以访问AlienInvasion中定义的所有资源
+        super().__init__()                      #继承sprite
         self.screen = ai_game.screen            #将屏幕赋给Ship 的一个属性 ,使这个类的方法可以轻松访问它
         self.setting = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()        #访问screen的rect属性 使飞船能后放到正确的位置
