@@ -10,9 +10,10 @@ class Bullet(Sprite):
         self.color = self.settings.bullet_color
         self.rect = pygame.Rect(0,0,self.settings.bullet_width,self.settings.bullet_height)
         self.x = float(self.rect.x)
-        self.x = window.rock.rect.x
-        self.y = window.rock.rect.y
-        self.rect.midbottom = (self.x,self.y)
+        self.x = window.rock.rect.x+256
+        self.y = window.rock.rect.y+80
+        self.rect.x = self.x
+        self.rect.y = self.y
 
     def update(self):
         self.x += self.settings.bullet_speed
@@ -27,7 +28,7 @@ class Settings:
         self.bullet_color = (0,0,60)
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_speed = 1.5
+        self.bullet_speed = 1
 
 class Rock:
     def __init__(self,main_screen) -> None:
@@ -45,10 +46,10 @@ class Rock:
         #     self.image_ract.x += 1
         # if self.rock_moving_left and self.image_ract.left > 0:
         #     self.image_ract.x -= 1
-        if self.rock_moving_up and self.image_ract.top > 0:
-            self.image_ract.y -= 1
-        if self.rock_moving_down and self.image_ract.bottom < self.screen.get_rect().bottom:
-            self.image_ract.y += 1
+        if self.rock_moving_up and self.rect.top > 0:
+            self.rect.y -= 1
+        if self.rock_moving_down and self.rect.bottom < self.screen.get_rect().bottom:
+            self.rect.y += 1
     def blime(self):
         self.screen.blit(self.image,self.rect)
 
@@ -65,17 +66,20 @@ class Window:
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     self.check_keydown_events(event)
-                    print(event.key)
+                    # print(event.key)
                 if event.type == pygame.KEYUP:
                     self.check_keyup_events(event)
             self.screen.fill(self.bg_color)
             self.rock.update()
 
-            self.bullets.update()
+            self.bullets.update() 
             for bullet in self.bullets.sprites():
+                if bullet.rect.y >= self.screen.get_width():
+                    self.bullets.remove(bullet)
                 bullet.draw_bullet()
                 
             self.rock.blime()
