@@ -6,7 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Learning Log</p>
+    {% extends 'learning_logs/base.html' %}
+    <!-- 子模板的第一行必须包含标签 extends，让
+    Django 知道它继承了哪个父模板 -->
+
+    {% block content %}
+    <!-- 不是从父模板继承的内容都在 content块中 -->
+
+    <!-- <p>Learning Log</p> -->
     <p>Learning Log helps you keep track of your learning,for any topic you're interested</p>
+    {% endblock content %}
 </body>
 </html>

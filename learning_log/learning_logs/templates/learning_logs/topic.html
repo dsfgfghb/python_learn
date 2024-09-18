@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% extends "learning_logs/base.html" %}
+    {% block content %}
+    <p>Topic:{{topic.text}}</p>
+    <p>Entries:</p>
+    <ul>
+        {% for entry in entries %}
+        <li>
+            <!-- 列出时间戳需要显示属性 date_added 的值 -->
+            <!-- 竖线（|）表示模板过滤器 -->
+            <p>{{entry.date_added|date:'M d, Y H:i'}}</p>
+            <!-- 过滤器linebreaks将包含换行符的长条目转换为浏览器能够
+            理解的格式，以免显示为不间断的文本块。 -->
+            <p>{{entry.text|linebreaks}}</p>
+        </li>
+        {% empty %}
+        <li>There are no entries for this topic yet.</li>
+        {% endfor %}
+    {% endblock content %}
+</body>
+
+</html>
