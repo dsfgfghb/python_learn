@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends "learning_logs/base.html" %}
+    {% block content %}
+    <p>Add a new topic:</p>
+    <form action = "{% url 'learning_logs:new_topic' %}" menthod='post'>
+        {% csrf_token %}
+        <!-- csrf_token来防止攻击者利用表单来对服务器进行未经授权的访问 -->
+        {{ form.as_div }}
+        <!-- as_div 让 Django 将所有表单元素都渲染为 HTML <div></div> -->
+        <button name="submit">Add topic</button>
+    </form>
+    {% endblock content %}
+</body>
+</html>
