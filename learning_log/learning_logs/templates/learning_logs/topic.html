@@ -25,6 +25,9 @@
             <!-- 过滤器linebreaks将包含换行符的长条目转换为浏览器能够
             理解的格式，以免显示为不间断的文本块。 -->
             <p>{{entry.text|linebreaks}}</p>
+            <p>
+                <a href="{% url 'learning_logs:edit_entry' entry.id %}" >Edit entry</a>
+            </p>
         </li>
         {% empty %}
         <li>There are no entries for this topic yet.</li>
