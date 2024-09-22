@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'learning_logs/base.html' %}
+    {% block content %}
+    {% if form.error %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button name="submit">Log in</button>
+    </form>
+    {% endblock content %}
+</body>
+</html> 
