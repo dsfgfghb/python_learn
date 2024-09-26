@@ -10,6 +10,20 @@
     <!-- 子模板的第一行必须包含标签 extends，让
     Django 知道它继承了哪个父模板 -->
 
+    {% block page_header %}
+    <div class="p-3 mb-4 bg_light border rounded-3"> 
+        <!-- py-4 在这个 div 中
+        添加了上内边距和下内边距。 -->
+        <div class ="container-fluid py-4">
+            <!-- display-3 让这个标题显得更瘦更高 -->
+            <h1 class="display-3">Track your learning.</h1>
+            <p class="lead">Make your own Learning Log,and keep a list of the topics you're learning about.
+                whenever you learn something new about a topic , make an entry summarizing what you're learned.</p>
+                <!-- &raquo; 是一个 HTML 实体，表示两个右尖括号（>>） -->
+                <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Register &raquo;</a>
+        </div>
+    </div>
+    {% endblock page_header %}
     {% block content %}
     <!-- 不是从父模板继承的内容都在 content块中 -->
 

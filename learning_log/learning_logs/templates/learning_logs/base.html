@@ -1,31 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Learning Log</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
+
 <body>
-    <p>
-        <a href="{% url 'learning_logs:index' %}">Learning Log</a> -
-        <a href="{% url 'learning_logs:topics' %}">Topics</a> -
-        <!--is_authenticated 属性：如果用户已登录，该属性为 True，否则为 False。-->
-        {% if user.is_authenticated %}
-            Hello,{{user.username}}.
-        {% else %}
-        <a href="{% url 'accounts:register' %}">Register</a>"
-        <a href="{% url 'accounts:login' %}">Log in</a>
-        {% endif %}
-        <!-- learning_logs 是一个命名空间 -->
+    <!-- 选择器（selector）决定了样式规则将应用于页面上的哪些元素。
+     选择器 navbar-light 和 bg-light使用一种浅色来设置导航栏的背景
+     mb-4 中的 mb 表示下边距。 -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+        <div class="container-fluid">
+            <!-- navbar-brand 设置这个链接的样式 -->
+            <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning_log</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- 定义导航栏左侧链接的代码-->
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+                    </li>
+                </ul>
+                <!-- 账户相关链接 -->
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="navbar-text me-2">Hello, {{user.username }}.
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Log in</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!-- 登出按钮 -->
+                {% if user.is_authenticated %}
+                <form action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary btn-sm">Log out</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <!--<main> 元素用于定义页面
+        主体的最重要的部分。这里指定了 Bootstrap 选择器
+        container -->
+        <div class="pb-2 mb-2 border-bottom">
+            {% block page_header %}
+            {% endblock page_header %}
+
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+    <!-- <p>
+        <a href="{ url 'learning_logs:index' }">Learning Log</a> -
+        <a href="{ url 'learning_logs:topics' }">Topics</a> -
+        is_authenticated 属性：如果用户已登录，该属性为 True，否则为 False。
+        { if user.is_authenticated }
+            Hello,{{user.username}}
+        { else }
+        <a href="{ url 'accounts:register' }">Register</a>"
+        <a href="{ url 'accounts:login' }">Log in</a>
+        { endif }
+         learning_logs 是一个命名空间 
     </p>
-    {% block content %}
-    {% endblock content %}
-    {% if user.is_authenticated %}
+    { block content }
+    { endblock content }
+    { if user.is_authenticated }
     <hr />
-    <form action = "{% url 'accounts:logout' %}" method = 'post'>
-        {% csrf_token %}
-        <button type = 'submit'>Log out</button>
+    <form action = "{ url 'accounts:logout' }" method = 'post'>
+        { csrf_token }
+        <button type = 'submit'>Log out</button
     </form>
-    {% endif %}
+    { endif } -->
 </body>
+
 </html>

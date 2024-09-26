@@ -9,6 +9,11 @@
 
 <body>
     {% extends "learning_logs/base.html" %}
+
+    {% block page_header %}
+    <h1>{{topic.text}}</h1>
+    {% endblock page_header %}
+
     {% block content %}
     <p>Topic:{{topic.text}}</p>
     <p>Entries:</p>
@@ -18,21 +23,31 @@
     </p>
     <ul>
         {% for entry in entries %}
-        <li>
+        <div class="card mb-3">
+            <h4 class="card-header">
+                {{entry.date_added|date:'M d, Y H:i'}}
+                <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">edit_entry</a></small>
+            </h4>
+            <div class="card-body">{{entry.text|linebreaks}}</div>
+        </div>
+
+        
+        <!-- <li> -->
             <!-- 列出时间戳需要显示属性 date_added 的值 -->
             <!-- 竖线（|）表示模板过滤器 -->
-            <p>{{entry.date_added|date:'M d, Y H:i'}}</p>
+            <!-- <p>  entry.date_added|date:'M d, Y H:i'  </p> -->
             <!-- 过滤器linebreaks将包含换行符的长条目转换为浏览器能够
             理解的格式，以免显示为不间断的文本块。 -->
-            <p>{{entry.text|linebreaks}}</p>
-            <p>
-                <a href="{% url 'learning_logs:edit_entry' entry.id %}" >Edit entry</a>
-            </p>
-        </li>
+            <!-- <p>  entry.text|linebreaks  </p> -->
+            <!-- <p> -->
+                <!-- <a href=" url 'learning_logs:edit_entry' entry.id ">Edit entry</a> -->
+            <!-- </p> -->
+        <!-- </li> -->
         {% empty %}
-        <li>There are no entries for this topic yet.</li>
+        <p>There are no entries for this topic yet.</p>
+        <!-- <li>There are no entries for this topic yet.</li> -->
         {% endfor %}
-    {% endblock content %}
+        {% endblock content %}
 </body>
 
 </html>

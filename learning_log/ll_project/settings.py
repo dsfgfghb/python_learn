@@ -34,6 +34,9 @@ INSTALLED_APPS = [
     'learning_logs',     #添加自定义应用
     'accounts',
 
+    'django_bootstrap5',        #第三方应用
+    
+
     'django.contrib.admin',     #Django 默认添加的应用程序
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #my settings
 LOGIN_REDIRECT_URL = 'learning_logs:index'#它告诉 Django 在用户成功登录后将其重定向到哪个 URL
 LOGOUT_REDIRECT_URL = 'learning_logs:index'  #Django 将已注销的用户重定向到主页。
+LOGIN_URL = 'accounts:login'   #让Django知道到哪里去查找登录页面。
