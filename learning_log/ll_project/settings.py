@@ -62,7 +62,7 @@ ROOT_URLCONF = 'll_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +134,34 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'learning_logs:index'#它告诉 Django 在用户成功登录后将其重定向到哪个 URL
 LOGOUT_REDIRECT_URL = 'learning_logs:index'  #Django 将已注销的用户重定向到主页。
 LOGIN_URL = 'accounts:login'   #让Django知道到哪里去查找登录页面。
+
+
+#Platform.sh设置
+# Config可帮助确定远程服务器上的设置。
+from platformshconfig import Config
+config=Config()
+# is_valid_platform()返回True表明设置将用于 Platform.sh 服务器
+if config.is_valid_platform():
+    # 指定由地址以 .platformsh.site 结尾的主机来支持项目所有通过免费试用服务部署的项目都由该主机提供支持。
+    ALLOWED_HOSTS.append('.platformsh.site')
+    DEBUG = False
+    # 设置正被加载到要部署的应用程序的目录中，就设置 STATIC_ROOT
+    if config.appDir:
+        STATIC_ROOT =Path(config.appDir) / 'static'
+    # 在远程服务器上设置了更安全的 SECRET_KEY
+    if config.projectEntropy:
+        SECRET_KEY = config.projectEntropy
+        
+    # 配置生产环境数据库
+    if not config.in_build():
+        db_settings = config.credentials('database')
+        DATABASES = {
+            'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': db_settings['path'],
+            'USER': db_settings['username'],
+            'PASSWORD': db_settings['password'],
+            'HOST': db_settings['host'],
+            'PORT': db_settings['port'],
+            },
+        }

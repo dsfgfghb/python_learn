@@ -2,16 +2,15 @@
 #
 # Translators:
 # Ali Ismayilov <ali@ismailov.info>, 2011
-# Emin Mastizada <emin@linux.com>, 2018,2020
-# Nijat Mammadov, 2024
+# Emin Mastizada <emin@linux.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 11:41-0300\n"
-"PO-Revision-Date: 2024-08-07 18:45+0000\n"
-"Last-Translator: Nijat Mammadov, 2024\n"
-"Language-Team: Azerbaijani (http://app.transifex.com/django/django/language/"
+"POT-Creation-Date: 2017-01-19 16:49+0100\n"
+"PO-Revision-Date: 2018-04-27 17:21+0000\n"
+"Last-Translator: Emin Mastizada <emin@linux.com>\n"
+"Language-Team: Azerbaijani (http://www.transifex.com/django/django/language/"
 "az/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,12 +22,12 @@ msgid "GIS"
 msgstr "GIS"
 
 msgid "The base GIS field."
-msgstr "Təməl GIS xanası."
+msgstr "Təməl GIS sahəsi (field)."
 
 msgid ""
-"The base Geometry field — maps to the OpenGIS Specification Geometry type."
+"The base Geometry field -- maps to the OpenGIS Specification Geometry type."
 msgstr ""
-"Təməl Həndəsə sahəsi — OpenGIS Specification Geometry növünə işarətlənir."
+"Təməl Həndəsə sahəsi -- OpenGIS Specification Geometry növünə işarətlənir."
 
 msgid "Point"
 msgstr "Nöqtə"
@@ -40,7 +39,7 @@ msgid "Polygon"
 msgstr "Poliqon"
 
 msgid "Multi-point"
-msgstr "Çox nöqtəli"
+msgstr "Nöqtələr"
 
 msgid "Multi-line string"
 msgstr "Xətlər"
@@ -75,6 +74,9 @@ msgstr ""
 msgid "Delete all Features"
 msgstr "Bütün Xüsusiyyətləri sil"
 
+msgid "WKT debugging window:"
+msgstr "WKT sazlama pəncərəsi:"
+
 msgid "Debugging window (serialized value)"
 msgstr "Sazlama pəncərəsi (seriallaşdırılmış dəyər)"
 
@@ -82,5 +84,5 @@ msgid "No feeds are registered."
 msgstr "Qeyd edilmiş axın yoxdur."
 
 #, python-format
-msgid "Slug %r isn’t registered."
-msgstr "%r qısaltması qeyd edilməyib."
+msgid "Slug %r isn't registered."
+msgstr "%r slug-ı qeyd edilməyib."
